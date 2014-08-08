@@ -61,6 +61,7 @@ Sergeant may provide traits for common frameworks in later revisions.
 - CodeSniffer for the PSRing
 
 - Consider DefaultHandlerLocator instead of Default Locator...
+- Consider changing $director->execute() to $director->instruct()
 
 
 ## License

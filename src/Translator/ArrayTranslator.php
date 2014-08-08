@@ -1,9 +1,9 @@
 <?php namespace Cairns\Sergeant\Translator;
 
-use Cairns\Sergeant\Translator\CommandTranslatorInterface;
-use Cairns\Sergeant\Exception\CommandTranslatorException;
+use Cairns\Sergeant\Translator\TranslatorInterface;
+use Cairns\Sergeant\Exception\TranslatorException;
 
-class ArrayCommandTranslator implements CommandTranslatorInterface
+class ArrayTranslator implements TranslatorInterface
 {
     private $map;
 
@@ -17,13 +17,13 @@ class ArrayCommandTranslator implements CommandTranslatorInterface
         $commandClass = get_class($command);
 
         if (! array_key_exists($commandClass, $this->map)) {
-            throw new CommandTranslatorException('Could not locate handler.');
+            throw new TranslatorException('Could not locate handler.');
         }
 
         $handler = $this->map[$commandClass];
 
         if (! class_exists($handler)) {
-            throw new CommandTranslatorException('Could not locate handler.');
+            throw new TranslatorException('Could not locate handler.');
         }
 
         return new $handler;

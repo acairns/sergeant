@@ -1,6 +1,6 @@
 <?php namespace Cairns\Sergeant\Translator;
 
-interface CommandTranslatorInterface
+interface TranslatorInterface
 {
     public function getHandler($command);
 }

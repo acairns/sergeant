@@ -1,7 +1,7 @@
 <?php namespace Cairns\Sergeant;
 
-use Cairns\Sergeant\Translator\CommandTranslatorStrategy;
-use Cairns\Sergeant\Translator\CommandTranslatorInterface;
+use Cairns\Sergeant\Translator\TranslatorStrategy;
+use Cairns\Sergeant\Translator\TranslatorInterface;
 
 class Sergeant
 {
@@ -10,7 +10,7 @@ class Sergeant
 
     public function __construct($locator = null)
     {
-        $this->translator = new CommandTranslatorStrategy($locator);
+        $this->translator = new TranslatorStrategy($locator);
     }
 
     public function getTranslator()

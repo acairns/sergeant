@@ -1,19 +1,19 @@
 <?php namespace Cairns\Sergeant\Translator;
 
-class CommandTranslatorStrategy implements CommandTranslatorInterface
+class TranslatorStrategy implements TranslatorInterface
 {
     private $strategy;
 
     public function __construct($resolver = null)
     {
-        $this->strategy = new DefaultCommandTranslator;
+        $this->strategy = new DefaultTranslator;
 
         if ($resolver instanceof \Closure) {
-            $this->strategy = new ClosureCommandTranslator($resolver);
+            $this->strategy = new ClosureTranslator($resolver);
         }
 
         if (is_array($resolver)) {
-            $this->strategy = new ArrayCommandTranslator($resolver);
+            $this->strategy = new ArrayTranslator($resolver);
         }
     }
 

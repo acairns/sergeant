@@ -1,7 +1,7 @@
 <?php
 
 use Cairns\Sergeant\Sergeant;
-use Cairns\Sergeant\Translator\DefaultCommandTranslator;
+use Cairns\Sergeant\Translator\DefaultTranslator;
 
 class SergeantTest extends PHPUnit_Framework_TestCase
 {
@@ -10,6 +10,6 @@ class SergeantTest extends PHPUnit_Framework_TestCase
         $director = new Sergeant;
         $translator = $director->getTranslator()->getStrategy();
         
-        $this->assertTrue($translator instanceof DefaultCommandTranslator);
+        $this->assertTrue($translator instanceof DefaultTranslator);
     }
 }

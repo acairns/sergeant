@@ -3,15 +3,15 @@
 use Cairns\Sergeant\Test\StubCommand;
 use Cairns\Sergeant\Test\StubCommandHandler;
 
-use Cairns\Sergeant\Translator\ArrayCommandTranslator;
+use Cairns\Sergeant\Translator\ArrayTranslator;
 
-class ArrayCommandTranslatorTest extends PHPUnit_Framework_TestCase
+class ArrayTranslatorTest extends PHPUnit_Framework_TestCase
 {
     public function test_bus_resolves_handler()
     {
-        $bus = new ArrayCommandTranslator([
+        $bus = new ArrayTranslator(array(
             'Cairns\Sergeant\Test\StubCommand' => 'Cairns\Sergeant\Test\StubCommandHandler'
-        ]);
+        ));
 
         $handler = $bus->getHandler(new StubCommand);
         
@@ -19,12 +19,12 @@ class ArrayCommandTranslatorTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException        Cairns\Sergeant\Exception\CommandTranslatorException
+     * @expectedException        Cairns\Sergeant\Exception\TranslatorException
      * @expectedExceptionMessage Could not locate handler.
      */
     public function test_bus_throws_exception_when_handler_is_not_found()
     {
-        $bus = new ArrayCommandTranslator([]);
+        $bus = new ArrayTranslator(array());
         $handler = $bus->getHandler(new stdClass);
     }
 }

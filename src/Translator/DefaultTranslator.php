@@ -1,8 +1,8 @@
 <?php namespace Cairns\Sergeant\Translator;
 
-use Cairns\Sergeant\Exception\CommandTranslatorException;
+use Cairns\Sergeant\Exception\TranslatorException;
 
-class DefaultCommandTranslator implements CommandTranslatorInterface
+class DefaultTranslator implements TranslatorInterface
 {
     public function getHandler($command)
     {
@@ -12,6 +12,6 @@ class DefaultCommandTranslator implements CommandTranslatorInterface
             return new $handlerClass;
         }
 
-        throw new CommandTranslatorException('Could not locate handler.');
+        throw new TranslatorException('Could not locate handler.');
     }
 }

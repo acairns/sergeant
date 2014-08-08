@@ -1,8 +1,8 @@
 <?php namespace Cairns\Sergeant\Translator;
 
-use Cairns\Sergeant\Exception\CommandTranslatorException;
+use Cairns\Sergeant\Exception\TranslatorException;
 
-class ClosureCommandTranslator implements CommandTranslatorInterface
+class ClosureTranslator implements TranslatorInterface
 {
     private $closure;
 
@@ -20,6 +20,6 @@ class ClosureCommandTranslator implements CommandTranslatorInterface
             return $handler;
         }
 
-        throw new CommandTranslatorException('Could not locate handler.');
+        throw new TranslatorException('Could not locate handler.');
     }
 }

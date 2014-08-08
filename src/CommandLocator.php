@@ -4,7 +4,7 @@ class CommandLocator
 {
     public function getHandler($command)
     {
-        $handlerClass = $command . 'Handler';
+        $handlerClass = get_class($command) . 'Handler';
 
         if (class_exists($handlerClass)) {
             return new $handlerClass;

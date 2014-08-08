@@ -25,7 +25,7 @@ class CommandDirector
 
     public function execute($command)
     {
-        $handler = $this->getLocator()->getHandler(get_class($command));
+        $handler = $this->getLocator()->getHandler($command);
         $handler->execute($command);
     }
 }

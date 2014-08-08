@@ -1,5 +1,7 @@
 <?php namespace Cairns\Sergeant\Locator;
 
+use Cairns\Sergeant\Exception\LocatorException;
+
 class CommandClosureLocator
 {
     private $closure;

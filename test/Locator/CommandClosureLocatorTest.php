@@ -3,7 +3,7 @@
 use Cairns\Sergeant\Test\StubCommand;
 use Cairns\Sergeant\Test\StubCommandHandler;
 
-use Cairns\Sergeant\Locator\CommandLocator;
+use Cairns\Sergeant\Locator\CommandClosureLocator;
 
 class CommandClosureLocatorTest extends PHPUnit_Framework_TestCase
 {
@@ -11,7 +11,7 @@ class CommandClosureLocatorTest extends PHPUnit_Framework_TestCase
     {
         $command = new StubCommand;
 
-        $locator = new CommandLocator(function ($command) {
+        $locator = new CommandClosureLocator(function ($command) {
             return new StubCommandHandler;
         });
 
@@ -26,7 +26,7 @@ class CommandClosureLocatorTest extends PHPUnit_Framework_TestCase
      */
     public function test_locator_throws_exception_when_handler_is_not_found()
     {
-        $locator = new CommandLocator(function ($command) {
+        $locator = new CommandClosureLocator(function ($command) {
             return false;
         });
         

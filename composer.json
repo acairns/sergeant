@@ -1,0 +1,31 @@
+{
+    "name": "andrewcairns/sergeant",
+    "description": "A modern, framework-agnostic, command bus",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Andrew Cairns",
+            "email": "andrew@acairns.co.uk",
+            "homepage": "http://acairns.co.uk/",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": ">=5.3"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "~4.0",
+        "mockery/mockery": "~0.9",
+        "squizlabs/php_codesniffer": "~1.5"
+    },
+    "autoload": {
+        "psr-4": {
+            "Cairns\\Sergeant\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Cairns\\Sergeant\\Test\\": "test"
+        }
+    }
+}

@@ -1,4 +1,4 @@
-#Sergeant
+# Sergeant
 
 Sergeant is a framework-agnostic command bus.
 
@@ -8,7 +8,6 @@ Sergeant is a framework-agnostic command bus.
 - Better code against interfaces
 - Sensible defaulting for handler locating
 - Create CommandArrayLocator to handle an array map passed to director
-- Handle closure passed to director as locator
 - Allow custom locator class to be passed to the director
 - DocBlock all the things!
 - CodeSniffer for the PSRing

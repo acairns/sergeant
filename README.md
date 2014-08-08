@@ -37,9 +37,9 @@ configured Sergeant instance:
 
 
 ```php
-class ExampleClass
+class Example
 {
-    use ExampleTrait;
+    use Sergeant;
 
     public function foo()
     {

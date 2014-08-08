@@ -1,4 +1,4 @@
-<?php namespace Cairns\Sergeant;
+<?php namespace Cairns\Sergeant\Locator;
 
 use Cairns\Sergeant\Exception\LocatorException;
 

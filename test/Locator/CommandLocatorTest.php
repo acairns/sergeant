@@ -1,17 +1,20 @@
 <?php
 
-use Cairns\Sergeant\Test\Stub\TestCommand;
+use Cairns\Sergeant\Test\StubCommand;
+use Cairns\Sergeant\Test\StubCommandHandler;
+
+use Cairns\Sergeant\Locator\CommandLocator;
 
 class CommandLocatorTest extends PHPUnit_Framework_TestCase
 {
     public function test_locator_resolves_handler()
     {
-        $command = new TestCommand;
+        $command = new StubCommand;
 
-        $locator = new Cairns\Sergeant\CommandLocator;
+        $locator = new CommandLocator;
         $handler = $locator->getHandler($command);
         
-        $this->assertTrue($handler instanceof Cairns\Sergeant\Test\Stub\TestCommandHandler);
+        $this->assertTrue($handler instanceof StubCommandHandler);
     }
 
     /**
@@ -20,7 +23,7 @@ class CommandLocatorTest extends PHPUnit_Framework_TestCase
      */
     public function test_locator_throws_exception_when_handler_is_not_found()
     {
-        $locator = new Cairns\Sergeant\CommandLocator;
+        $locator = new CommandLocator;
         $handler = $locator->getHandler(new stdClass);
     }
 }

@@ -1,28 +1,21 @@
 <?php namespace Cairns\Sergeant;
 
-use Cairns\Sergeant\Bus\CommandBus;
-use Cairns\Sergeant\Bus\CommandBusInterface;
+use Cairns\Sergeant\Translator\CommandTranslatorStrategy;
+use Cairns\Sergeant\Translator\CommandTranslatorInterface;
 
-class CommandDirector
+class Sergeant
 {
-    private $bus;
+    private $translator;
     private $resolver;
 
     public function __construct($locator = null)
     {
-        $this->setCommandBus(
-            CommandBus::factory($locator)
-        );
+        $this->translator = new CommandTranslatorStrategy($locator);
     }
 
-    public function setCommandBus(CommandBusInterface $bus)
+    public function getTranslator()
     {
-        $this->bus = $bus;
-    }
-
-    public function getCommandBus()
-    {
-        return $this->bus;
+        return $this->translator;
     }
 
     public function setResolver(\Closure $resolver)
@@ -38,7 +31,7 @@ class CommandDirector
     public function execute($command)
     {
         $handler = $this->resolve(
-            $this->getCommandBus()->getHandler($command)
+            $this->getTranslator()->getHandler($command)
         );
         
         $handler->handle($command);

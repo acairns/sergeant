@@ -57,11 +57,12 @@ Sergeant may provide traits for common frameworks in later revisions.
 - Sensible defaulting for handler locating
 - Create CommandArrayLocator to handle an array map passed to director
 - Allow custom locator class to be passed to the director
-- DocBlock all the things!
 - CodeSniffer for the PSRing
+- DocBlock all the things!
 
 - Consider DefaultHandlerLocator instead of Default Locator...
 - Consider changing $director->execute() to $director->instruct()
+- Consider resolving... what about the __construct()'s for handlers?
 
 
 ## License

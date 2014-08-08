@@ -6,11 +6,12 @@ use Cairns\Sergeant\Bus\CommandBusInterface;
 class CommandDirector
 {
     private $bus;
+    private $resolver;
 
-    public function __construct($resolver = null)
+    public function __construct($locator = null)
     {
         $this->setCommandBus(
-            CommandBus::factory($resolver)
+            CommandBus::factory($locator)
         );
     }
 
@@ -24,9 +25,32 @@ class CommandDirector
         return $this->bus;
     }
 
+    public function setResolver(\Closure $resolver)
+    {
+        $this->resolver = $resolver;
+    }
+
+    public function getResolver()
+    {
+        return $this->resolver;
+    }
+
     public function execute($command)
     {
-        $handler = $this->getCommandBus()->getHandler($command);
+        $handler = $this->resolve(
+            $this->getCommandBus()->getHandler($command)
+        );
+        
         $handler->handle($command);
+    }
+
+    protected function resolve($handler)
+    {
+        if (! $this->resolver) {
+            return new $handler;
+        }
+
+        $resolver = $this->resolver;
+        return $resolver($handler);
     }
 }

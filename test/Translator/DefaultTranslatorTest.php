@@ -3,33 +3,27 @@
 use Cairns\Sergeant\Test\StubCommand;
 use Cairns\Sergeant\Test\StubCommandHandler;
 
-use Cairns\Sergeant\Bus\ClosureCommandBus;
+use Cairns\Sergeant\Translator\DefaultTranslator;
 
-class ClosureCommandBusTest extends PHPUnit_Framework_TestCase
+class DefaultTranslatorTest extends PHPUnit_Framework_TestCase
 {
     public function test_bus_resolves_handler()
     {
         $command = new StubCommand;
 
-        $bus = new ClosureCommandBus(function ($command) {
-            return new StubCommandHandler;
-        });
-
+        $bus = new DefaultTranslator;
         $handler = $bus->getHandler($command);
         
         $this->assertTrue($handler instanceof StubCommandHandler);
     }
 
     /**
-     * @expectedException        Cairns\Sergeant\Exception\CommandBusException
+     * @expectedException        Cairns\Sergeant\Exception\TranslatorException
      * @expectedExceptionMessage Could not locate handler.
      */
     public function test_bus_throws_exception_when_handler_is_not_found()
     {
-        $bus = new ClosureCommandBus(function ($command) {
-            return false;
-        });
-        
+        $bus = new DefaultTranslator;
         $handler = $bus->getHandler(new stdClass);
     }
 }

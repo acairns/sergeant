@@ -1,9 +1,9 @@
-<?php namespace Cairns\Sergeant\Bus;
+<?php namespace Cairns\Sergeant\Translator;
 
-use Cairns\Sergeant\Bus\CommandBusInterface;
-use Cairns\Sergeant\Exception\CommandBusException;
+use Cairns\Sergeant\Translator\TranslatorInterface;
+use Cairns\Sergeant\Exception\TranslatorException;
 
-class ArrayCommandBus implements CommandBusInterface
+class ArrayTranslator implements TranslatorInterface
 {
     private $map;
 
@@ -17,13 +17,13 @@ class ArrayCommandBus implements CommandBusInterface
         $commandClass = get_class($command);
 
         if (! array_key_exists($commandClass, $this->map)) {
-            throw new CommandBusException('Could not locate handler.');
+            throw new TranslatorException('Could not locate handler.');
         }
 
         $handler = $this->map[$commandClass];
 
         if (! class_exists($handler)) {
-            throw new CommandBusException('Could not locate handler.');
+            throw new TranslatorException('Could not locate handler.');
         }
 
         return new $handler;

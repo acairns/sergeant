@@ -1,8 +1,8 @@
 <?php namespace Cairns\Sergeant\Test;
 
-use Cairns\Sergeant\CommandHandlerInterface;
+use Cairns\Sergeant\HandlerInterface;
 
-class StubCommandHandler implements CommandHandlerInterface
+class StubCommandHandler implements HandlerInterface
 {
     public function handle($command)
     {

@@ -1,6 +1,6 @@
 <?php namespace Cairns\Sergeant;
 
-interface CommandHandlerInterface
+interface HandlerInterface
 {
     public function handle($command);
 }

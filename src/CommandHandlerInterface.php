@@ -2,5 +2,5 @@
 
 interface CommandHandlerInterface
 {
-    public function execute($command);
+    public function handle($command);
 }

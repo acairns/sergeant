@@ -4,7 +4,7 @@ use Cairns\Sergeant\CommandHandlerInterface;
 
 class TestCommandHandler implements CommandHandlerInterface
 {
-    public function execute($command)
+    public function handle($command)
     {
         $command->run();
     }

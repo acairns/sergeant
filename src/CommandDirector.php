@@ -1,7 +1,7 @@
 <?php namespace Cairns\Sergeant;
 
-use Cairns\Sergeant\Locator\CommandLocator;
-use Cairns\Sergeant\Locator\CommandClosureLocator;
+use Cairns\Sergeant\Locator\DefaultLocator;
+use Cairns\Sergeant\Locator\ClosureLocator;
 
 class CommandDirector
 {
@@ -10,11 +10,11 @@ class CommandDirector
     public function __construct($locator = null)
     {
         if ($locator instanceof \Closure) {
-            $locator = new CommandClosureLocator($locator);
+            $locator = new ClosureLocator($locator);
         }
 
         if (! $locator) {
-            $locator = new CommandLocator;
+            $locator = new DefaultLocator;
         }
 
         $this->setLocator($locator);

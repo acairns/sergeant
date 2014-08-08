@@ -2,7 +2,7 @@
 
 use Cairns\Sergeant\Exception\LocatorException;
 
-class CommandLocator
+class DefaultLocator
 {
     public function getHandler($command)
     {

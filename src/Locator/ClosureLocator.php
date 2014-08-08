@@ -2,7 +2,7 @@
 
 use Cairns\Sergeant\Exception\LocatorException;
 
-class CommandClosureLocator
+class ClosureLocator
 {
     private $closure;
 

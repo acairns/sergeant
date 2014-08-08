@@ -3,15 +3,18 @@
 use Cairns\Sergeant\Test\StubCommand;
 use Cairns\Sergeant\Test\StubCommandHandler;
 
-use Cairns\Sergeant\Locator\CommandLocator;
+use Cairns\Sergeant\Locator\ClosureLocator;
 
-class CommandLocatorTest extends PHPUnit_Framework_TestCase
+class ClosureLocatorTest extends PHPUnit_Framework_TestCase
 {
     public function test_locator_resolves_handler()
     {
         $command = new StubCommand;
 
-        $locator = new CommandLocator;
+        $locator = new ClosureLocator(function ($command) {
+            return new StubCommandHandler;
+        });
+
         $handler = $locator->getHandler($command);
         
         $this->assertTrue($handler instanceof StubCommandHandler);
@@ -23,7 +26,10 @@ class CommandLocatorTest extends PHPUnit_Framework_TestCase
      */
     public function test_locator_throws_exception_when_handler_is_not_found()
     {
-        $locator = new CommandLocator;
+        $locator = new ClosureLocator(function ($command) {
+            return false;
+        });
+        
         $handler = $locator->getHandler(new stdClass);
     }
 }

@@ -1,38 +1,32 @@
 <?php namespace Cairns\Sergeant;
 
-use Cairns\Sergeant\Locator\DefaultLocator;
-use Cairns\Sergeant\Locator\ClosureLocator;
+use Cairns\Sergeant\Bus\CommandBus;
+use Cairns\Sergeant\Bus\CommandBusInterface;
 
 class CommandDirector
 {
-    private $locator;
+    private $bus;
 
-    public function __construct($locator = null)
+    public function __construct($resolver = null)
     {
-        if ($locator instanceof \Closure) {
-            $locator = new ClosureLocator($locator);
-        }
-
-        if (! $locator) {
-            $locator = new DefaultLocator;
-        }
-
-        $this->setLocator($locator);
+        $this->setCommandBus(
+            CommandBus::factory($resolver)
+        );
     }
 
-    public function setLocator($locator)
+    public function setCommandBus(CommandBusInterface $bus)
     {
-        $this->locator = $locator;
+        $this->bus = $bus;
     }
 
-    public function getLocator()
+    public function getCommandBus()
     {
-        return $this->locator;
+        return $this->bus;
     }
 
     public function execute($command)
     {
-        $handler = $this->getLocator()->getHandler($command);
+        $handler = $this->getCommandBus()->getHandler($command);
         $handler->handle($command);
     }
 }

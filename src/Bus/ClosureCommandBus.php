@@ -1,8 +1,9 @@
-<?php namespace Cairns\Sergeant\Locator;
+<?php namespace Cairns\Sergeant\Bus;
 
-use Cairns\Sergeant\Exception\LocatorException;
+use Cairns\Sergeant\Bus\CommandBusInterface;
+use Cairns\Sergeant\Exception\CommandBusException;
 
-class ClosureLocator
+class ClosureCommandBus implements CommandBusInterface
 {
     private $closure;
 
@@ -20,6 +21,6 @@ class ClosureLocator
             return $handler;
         }
 
-        throw new LocatorException('Could not locate handler.');
+        throw new CommandBusException('Could not locate handler.');
     }
 }

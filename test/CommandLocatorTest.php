@@ -15,7 +15,7 @@ class CommandLocatorTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException        RuntimeException
+     * @expectedException        Cairns\Sergeant\Exception\LocatorException
      * @expectedExceptionMessage Could not locate handler.
      */
     public function test_locator_throws_exception_when_handler_is_not_found()

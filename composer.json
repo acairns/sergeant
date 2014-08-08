@@ -22,5 +22,10 @@
         "psr-4": {
             "Cairns\\Sergeant\\": "src"
         }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Cairns\\Sergeant\\Test\\": "test"
+        }
     }
 }

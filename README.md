@@ -1,5 +1,8 @@
 # Sergeant
 
+[![Build Status](https://travis-ci.org/acairns/sergeant.svg?branch=master)](https://travis-ci.org/acairns/sergeant)
+[![Coverage Status](https://img.shields.io/coveralls/acairns/sergeant.svg)](https://coveralls.io/r/acairns/sergeant)
+
 Sergeant is a framework-agnostic command bus.
 
 ## How
@@ -54,15 +57,15 @@ Sergeant may provide traits for common frameworks in later revisions.
 ## Todo
 
 - Better code against interfaces
-- Sensible defaulting for handler locating
-- Create CommandArrayLocator to handle an array map passed to director
-- Allow custom locator class to be passed to the director
+- Allow custom locator class to be passed to Sergeant
 - CodeSniffer for the PSRing
+- Integrations namespace with laravel service provider & trait.
 - DocBlock all the things!
 
-- Consider DefaultHandlerLocator instead of Default Locator...
-- Consider changing $director->execute() to $director->instruct()
+- Consider changing $sergeant->execute() to instruct(), or direct()?
 - Consider resolving... what about the __construct()'s for handlers?
+    -- Maybe we can assume all dependencies come from the command?
+    -- Not sure how sensible this is... but it is a way to inject
 
 
 ## License

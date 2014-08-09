@@ -22,9 +22,21 @@ class ArrayTranslatorTest extends PHPUnit_Framework_TestCase
      * @expectedException        Cairns\Sergeant\Exception\TranslatorException
      * @expectedExceptionMessage Could not locate handler.
      */
-    public function test_bus_throws_exception_when_handler_is_not_found()
+    public function test_bus_throws_exception_when_handler_is_not_mapped()
     {
         $bus = new ArrayTranslator(array());
+        $handler = $bus->getHandler(new stdClass);
+    }
+
+    /**
+     * @expectedException        Cairns\Sergeant\Exception\TranslatorException
+     * @expectedExceptionMessage Could not locate handler.
+     */
+    public function test_bus_throws_exception_when_handler_does_not_exist()
+    {
+        $bus = new ArrayTranslator(array(
+            'stdClass' => 'fooBarBazQux'
+        ));
         $handler = $bus->getHandler(new stdClass);
     }
 }

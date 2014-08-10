@@ -2,19 +2,16 @@
 
 use Cairns\Sergeant\Test\StubCommand;
 use Cairns\Sergeant\Test\StubCommandHandler;
-
+use Cairns\Sergeant\Test\TranslatorTestCase;
 use Cairns\Sergeant\Translator\DefaultTranslator;
 
-class DefaultTranslatorTest extends PHPUnit_Framework_TestCase
-{
-    public function test_translator_resolves_handler()
-    {
-        $command = new StubCommand;
 
+class DefaultTranslatorTest extends TranslatorTestCase
+{
+    public function test_translator_resolves_handler_from_class_name()
+    {
         $translator = new DefaultTranslator;
-        $handler = $translator->getHandler($command);
-        
-        $this->assertTrue($handler instanceof StubCommandHandler);
+        $this->assertGetsHandler($translator);
     }
 
     /**

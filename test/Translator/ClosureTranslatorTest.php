@@ -1,21 +1,18 @@
 <?php
 
-use Cairns\Sergeant\Test\StubCommand;
 use Cairns\Sergeant\Test\StubCommandHandler;
-
+use Cairns\Sergeant\Test\TranslatorTestCase;
 use Cairns\Sergeant\Translator\ClosureTranslator;
 
-class ClosureTranslatorTest extends PHPUnit_Framework_TestCase
+class ClosureTranslatorTest extends TranslatorTestCase
 {
-    public function test_translator_resolves_handler()
+    public function test_translator_resolves_handler_from_closure()
     {
         $translator = new ClosureTranslator(function () {
             return new StubCommandHandler;
         });
 
-        $handler = $translator->getHandler(new StubCommand);
-        
-        $this->assertTrue($handler instanceof StubCommandHandler);
+        $this->assertGetsHandler($translator);
     }
 
     /**
@@ -28,6 +25,6 @@ class ClosureTranslatorTest extends PHPUnit_Framework_TestCase
             return false;
         });
         
-        $handler = $translator->getHandler(new stdClass);
+        $translator->getHandler(new stdClass);
     }
 }

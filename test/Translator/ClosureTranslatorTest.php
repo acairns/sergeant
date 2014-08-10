@@ -7,15 +7,13 @@ use Cairns\Sergeant\Translator\ClosureTranslator;
 
 class ClosureTranslatorTest extends PHPUnit_Framework_TestCase
 {
-    public function test_bus_resolves_handler()
+    public function test_translator_resolves_handler()
     {
-        $command = new StubCommand;
-
-        $bus = new ClosureTranslator(function ($command) {
+        $translator = new ClosureTranslator(function () {
             return new StubCommandHandler;
         });
 
-        $handler = $bus->getHandler($command);
+        $handler = $translator->getHandler(new StubCommand);
         
         $this->assertTrue($handler instanceof StubCommandHandler);
     }
@@ -24,12 +22,12 @@ class ClosureTranslatorTest extends PHPUnit_Framework_TestCase
      * @expectedException        Cairns\Sergeant\Exception\TranslatorException
      * @expectedExceptionMessage Could not locate handler.
      */
-    public function test_bus_throws_exception_when_handler_is_not_found()
+    public function test_translator_throws_exception_when_handler_is_not_found()
     {
-        $bus = new ClosureTranslator(function ($command) {
+        $translator = new ClosureTranslator(function () {
             return false;
         });
         
-        $handler = $bus->getHandler(new stdClass);
+        $handler = $translator->getHandler(new stdClass);
     }
 }

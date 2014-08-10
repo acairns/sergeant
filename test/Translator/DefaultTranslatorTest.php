@@ -5,7 +5,6 @@ use Cairns\Sergeant\Test\StubCommandHandler;
 use Cairns\Sergeant\Test\TranslatorTestCase;
 use Cairns\Sergeant\Translator\DefaultTranslator;
 
-
 class DefaultTranslatorTest extends TranslatorTestCase
 {
     public function test_translator_resolves_handler_from_class_name()

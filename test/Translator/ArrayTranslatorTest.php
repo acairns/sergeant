@@ -2,7 +2,6 @@
 
 use Cairns\Sergeant\Test\StubCommand;
 use Cairns\Sergeant\Test\StubCommandHandler;
-
 use Cairns\Sergeant\Translator\ArrayTranslator;
 
 class ArrayTranslatorTest extends PHPUnit_Framework_TestCase

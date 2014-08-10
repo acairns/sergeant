@@ -7,16 +7,16 @@ class ClosureTranslator implements TranslatorInterface
     /**
      * Callback to resolve translator.
      *
-     * @var Closure
+     * @var \Closure
      */
     private $closure;
 
     /**
      * Store closure to be used when resolving handler.
      *
-     * @param callable $closure
+     * @param \Closure $closure
      */
-    public function __construct(callable $closure)
+    public function __construct(\Closure $closure)
     {
         $this->closure = $closure;
     }

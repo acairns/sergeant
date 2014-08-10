@@ -5,15 +5,33 @@
 [![Quality Score](https://img.shields.io/scrutinizer/g/acairns/sergeant.svg?style=flat)](https://scrutinizer-ci.com/g/acairns/sergeant/?branch=master)
 [![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat)](LICENSE)
 
-
-Sergeant is a framework-agnostic command bus.
-
-This package complies with [PSR-1], [PSR-2] and [PSR-4]. If you notice any violations with these guidelines, please
-create an issue or submit a pull request.
+This package intends to comply with [PSR-1], [PSR-2] and [PSR-4]. If you notice any violations with these guidelines, please submit an issue or a pull request.
 
 [PSR-1]: https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-1-basic-coding-standard.md
 [PSR-2]: https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-2-coding-style-guide.md
 [PSR-4]: https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-4-autoloader.md
+
+---
+
+Sergeant allows business logic to be extracted into their own classes and executed using domain language specific to the application.
+
+
+Why use Sergeant?
+
+- Allows business code to be abstracted into separate classes.
+- Runs commands named using language which describes it's intent.
+- Highly configurable and framework-agnostic.
+- Enforces a 1:1 relationship between Command and Handler.
+
+
+## Requirements
+
+The following versions of PHP are supported by this version.
+
+- PHP 5.3
+- PHP 5.4
+- PHP 5.5
+- PHP 5.6
 
 
 ## Install
@@ -23,20 +41,10 @@ The primary way to install Sergeant is via Composer:
 ``` json
 {
     "require": {
-        "cairns/sergeant": "~0.2"
+        "cairns/sergeant": "~0.3"
     }
 }
 ```
-
-
-## Requirements
-
-The following versions of PHP are supported by this version.
-
-* PHP 5.3
-* PHP 5.4
-* PHP 5.5
-* PHP 5.6
 
 
 ## Getting Started
@@ -66,12 +74,11 @@ $sergeant = new Cairns\Sergeant(function ($command) {
 $sergeant->execute(new ExampleCommand); // Will assume ExampleCommandHandler
 ```
 
-## Example
+## Example Usage
 
 The command should contain all information your CommandHandler requires to complete the task.
 
-It can take any form your application requres, however convention dictates this object should be a simple Data Transfer
-Object.
+It can take any form your application requres, however convention dictates this object should be a simple Data Transfer Object.
 
 ``` php
 class ExampleCommand
@@ -116,14 +123,13 @@ $sergeant->execute($command); // string(12) "Just Testing"
 ```
 
 
-## No traits?
+## Traits
 
-That's right, Sergeant does not provide any traits you can mix into your existing classes. This is due to the
-framework-agnostic and configurable nature of Sergeant.
+Sergeant does not provide any traits you can mix into your existing classes. This is due to the configurable and framework-agnostic nature of Sergeant.
 
-However, a trait can be easily created to provide Sergent to any class you may wish.
+However, creating a trait is a great way to easily provide Sergent to any class you may wish.
 
-For example, in Laravel, you may wish to resolve Sergent from the IoC:
+For example, in Laravel you may wish to resolve Sergent from the IoC:
 
 ```php
 trait SergeantTrait
@@ -152,17 +158,13 @@ class Example
 }
 ```
 
-Future versions of Sergeant may provide traits to help integrations with common frameworks however the package is
-committed to remaining framework-agnostic.
+Future versions of Sergeant may provide traits to help integrations with common frameworks however the package is committed to remaining framework-agnostic.
 
 
-## Todo
+## Credits
 
-- Add a proper dispatcher
-- Allow custom locator class to be passed to Sergeant
-- Add CodeSniffer as part of Travis build?
-- Integration namespace, with laravel service provider & trait.
-
+- [Andrew Cairns](https://github.com/acairns)
+- [All Contributors](https://github.com/acairns/sergeant/contributors)
 
 ## License
 

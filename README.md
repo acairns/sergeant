@@ -1,11 +1,19 @@
 # Sergeant
 
 [![Build Status](https://img.shields.io/travis/acairns/sergeant/master.svg?style=flat)](https://travis-ci.org/acairns/sergeant)
-[![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat)](LICENSE)
 [![Coverage Status](https://img.shields.io/coveralls/acairns/sergeant.svg?style=flat)](https://coveralls.io/r/acairns/sergeant)
+[![Quality Score](https://img.shields.io/scrutinizer/g/acairns/sergeant.svg?style=flat)](https://scrutinizer-ci.com/g/acairns/sergeant/?branch=master)
+[![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat)](LICENSE)
 
 
 Sergeant is a framework-agnostic command bus.
+
+This package complies with [PSR-1], [PSR-2] and [PSR-4]. If you notice any violations with these guidelines, please
+create an issue or submit a pull request.
+
+[PSR-1]: https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-1-basic-coding-standard.md
+[PSR-2]: https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-2-coding-style-guide.md
+[PSR-4]: https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-4-autoloader.md
 
 
 ## Install
@@ -154,7 +162,6 @@ committed to remaining framework-agnostic.
 - Allow custom locator class to be passed to Sergeant
 - Add CodeSniffer as part of Travis build?
 - Integration namespace, with laravel service provider & trait.
-- DocBlock all the things!
 
 
 ## License

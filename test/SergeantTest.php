@@ -8,7 +8,7 @@ class SergeantTest extends PHPUnit_Framework_TestCase
     public function test_sergeant_creates_default_translator()
     {
         $sergeant = new Sergeant;
-        $translator = $sergeant->getTranslator()->getStrategy();
+        $translator = $sergeant->getStrategy()->getTranslator();
         
         $this->assertTrue($translator instanceof DefaultTranslator);
     }

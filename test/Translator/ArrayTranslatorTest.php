@@ -9,11 +9,11 @@ class ArrayTranslatorTest extends PHPUnit_Framework_TestCase
 {
     public function test_bus_resolves_handler()
     {
-        $bus = new ArrayTranslator(array(
+        $translator = new ArrayTranslator(array(
             'Cairns\Sergeant\Test\StubCommand' => 'Cairns\Sergeant\Test\StubCommandHandler'
         ));
 
-        $handler = $bus->getHandler(new StubCommand);
+        $translator->getHandler(new StubCommand);
         
         $this->assertTrue($handler instanceof StubCommandHandler);
     }
@@ -24,8 +24,8 @@ class ArrayTranslatorTest extends PHPUnit_Framework_TestCase
      */
     public function test_bus_throws_exception_when_handler_is_not_mapped()
     {
-        $bus = new ArrayTranslator(array());
-        $handler = $bus->getHandler(new stdClass);
+        $translator = new ArrayTranslator(array());
+        $translator->getHandler(new stdClass);
     }
 
     /**
@@ -34,9 +34,9 @@ class ArrayTranslatorTest extends PHPUnit_Framework_TestCase
      */
     public function test_bus_throws_exception_when_handler_does_not_exist()
     {
-        $bus = new ArrayTranslator(array(
+        $translator = new ArrayTranslator(array(
             'stdClass' => 'fooBarBazQux'
         ));
-        $handler = $bus->getHandler(new stdClass);
+        $translator->getHandler(new stdClass);
     }
 }

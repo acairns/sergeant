@@ -1,5 +1,5 @@
 {
-    "name": "andrewcairns/sergeant",
+    "name": "cairns/sergeant",
     "description": "A modern, framework-agnostic, command bus",
     "license": "MIT",
     "authors": [

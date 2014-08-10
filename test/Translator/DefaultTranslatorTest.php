@@ -2,28 +2,24 @@
 
 use Cairns\Sergeant\Test\StubCommand;
 use Cairns\Sergeant\Test\StubCommandHandler;
-
+use Cairns\Sergeant\Test\TranslatorTestCase;
 use Cairns\Sergeant\Translator\DefaultTranslator;
 
-class DefaultTranslatorTest extends PHPUnit_Framework_TestCase
+class DefaultTranslatorTest extends TranslatorTestCase
 {
-    public function test_bus_resolves_handler()
+    public function test_translator_resolves_handler_from_class_name()
     {
-        $command = new StubCommand;
-
-        $bus = new DefaultTranslator;
-        $handler = $bus->getHandler($command);
-        
-        $this->assertTrue($handler instanceof StubCommandHandler);
+        $translator = new DefaultTranslator;
+        $this->assertGetsHandler($translator);
     }
 
     /**
      * @expectedException        Cairns\Sergeant\Exception\TranslatorException
      * @expectedExceptionMessage Could not locate handler.
      */
-    public function test_bus_throws_exception_when_handler_is_not_found()
+    public function test_translator_throws_exception_when_handler_is_not_found()
     {
-        $bus = new DefaultTranslator;
-        $handler = $bus->getHandler(new stdClass);
+        $translator = new DefaultTranslator;
+        $translator->getHandler(new stdClass);
     }
 }

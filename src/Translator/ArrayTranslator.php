@@ -5,13 +5,28 @@ use Cairns\Sergeant\Exception\TranslatorException;
 
 class ArrayTranslator implements TranslatorInterface
 {
+    /**
+     * Command to Handler map array.
+     *
+     * @var array
+     */
     private $map;
 
+    /**
+     * Stores map array.
+     *
+     * @var array
+     */
     public function __construct($map)
     {
         $this->map = $map;
     }
 
+    /**
+     * Locates Handler for Command via map array.
+     *
+     * @var object
+     */
     public function getHandler($command)
     {
         $commandClass = get_class($command);

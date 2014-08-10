@@ -2,18 +2,17 @@
 
 use Cairns\Sergeant\Test\StubCommand;
 use Cairns\Sergeant\Test\StubCommandHandler;
-
 use Cairns\Sergeant\Translator\ArrayTranslator;
 
 class ArrayTranslatorTest extends PHPUnit_Framework_TestCase
 {
-    public function test_bus_resolves_handler()
+    public function test_translator_resolves_handler()
     {
-        $bus = new ArrayTranslator(array(
+        $translator = new ArrayTranslator(array(
             'Cairns\Sergeant\Test\StubCommand' => 'Cairns\Sergeant\Test\StubCommandHandler'
         ));
 
-        $handler = $bus->getHandler(new StubCommand);
+        $handler = $translator->getHandler(new StubCommand);
         
         $this->assertTrue($handler instanceof StubCommandHandler);
     }
@@ -22,21 +21,21 @@ class ArrayTranslatorTest extends PHPUnit_Framework_TestCase
      * @expectedException        Cairns\Sergeant\Exception\TranslatorException
      * @expectedExceptionMessage Could not locate handler.
      */
-    public function test_bus_throws_exception_when_handler_is_not_mapped()
+    public function test_translator_throws_exception_when_handler_is_not_mapped()
     {
-        $bus = new ArrayTranslator(array());
-        $handler = $bus->getHandler(new stdClass);
+        $translator = new ArrayTranslator(array());
+        $translator->getHandler(new stdClass);
     }
 
     /**
      * @expectedException        Cairns\Sergeant\Exception\TranslatorException
      * @expectedExceptionMessage Could not locate handler.
      */
-    public function test_bus_throws_exception_when_handler_does_not_exist()
+    public function test_translator_throws_exception_when_handler_does_not_exist()
     {
-        $bus = new ArrayTranslator(array(
+        $translator = new ArrayTranslator(array(
             'stdClass' => 'fooBarBazQux'
         ));
-        $handler = $bus->getHandler(new stdClass);
+        $translator->getHandler(new stdClass);
     }
 }

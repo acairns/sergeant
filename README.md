@@ -153,7 +153,7 @@ class Example
 
     public function foo()
     {
-        $this->execute(new Bar);
+        $this->execute(new ExampleCommand);
     }
 }
 ```

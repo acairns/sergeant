@@ -36,7 +36,7 @@ class Sergeant
      * Instruct handler to process the command.
      *
      * @param object $command
-     * @return void
+     * @return mixed
      */
     public function execute($command)
     {

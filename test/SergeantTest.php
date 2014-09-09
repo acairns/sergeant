@@ -1,7 +1,6 @@
 <?php
 
 use Cairns\Sergeant\Sergeant;
-use Cairns\Sergeant\Translator\DefaultTranslator;
 
 class SergeantTest extends PHPUnit_Framework_TestCase
 {
@@ -10,49 +9,60 @@ class SergeantTest extends PHPUnit_Framework_TestCase
         $sergeant = new Sergeant;
         $translator = $sergeant->getStrategy()->getTranslator();
         
-        $this->assertTrue($translator instanceof DefaultTranslator);
+        $this->assertInstanceOf('Cairns\Sergeant\Translator\DefaultTranslator', $translator);
     }
 
-    public function test_sergeant_executes()
+    public function test_sergeant_locates_handler_using_map_array()
     {
-        $command = Mockery::mock('Cairns\Sergeant\Test\StubCommand');
-        $command->shouldReceive('get')->times(1);
-
-        $sergeant = new Sergeant(array(
+        $command = $this->createMockCommand();
+        
+        $map = array(
             get_class($command) => 'Cairns\Sergeant\Test\StubCommandHandler'
-        ));
+        );
 
-        $sergeant->execute($command);
+        $this->assertCommandHandled($command, $map);
     }
 
-    public function test_sergeant_executes_closure()
+    public function test_sergeant_locates_handler_using_closure_returning_string()
     {
-        $command = Mockery::mock('Cairns\Sergeant\Test\StubCommand');
-        $command->shouldReceive('get')->times(1);
+        $command = $this->createMockCommand();
 
-        $sergeant = new Sergeant(function () {
+        $closure = function () {
             return 'Cairns\Sergeant\Test\StubCommandHandler';
-        });
+        };
 
-        $sergeant->execute($command);
+        $this->assertCommandHandled($command, $closure);
     }
 
-    public function test_sergeant_executes_closure_which_returns_class()
+    public function test_sergeant_uses_handler_returned_from_closure()
     {
-        $command = Mockery::mock('Cairns\Sergeant\Test\StubCommand');
+        $command = $this->createMockCommand();
 
-        $sergeant = new Sergeant(function ($command) {
+        $closure = function ($command) {
             $handler = Mockery::mock('Cairns\Sergeant\Test\StubCommandHandler')->makePartial();
-            $handler->shouldReceive('handle')->times(1);
+            $handler->shouldReceive('handle')->times(1)->passthru();
             
             return $handler;
-        });
+        };
 
-        $sergeant->execute($command);
+        $this->assertCommandHandled($command, $closure);
     }
 
     protected function tearDown()
     {
         Mockery::close();
+    }
+
+    private function createMockCommand()
+    {
+        return Mockery::mock('Cairns\Sergeant\Test\StubCommand');
+    }
+
+    private function assertCommandHandled($command, $config)
+    {
+        $command->shouldReceive('get')->times(1);
+
+        $sergeant = new Sergeant($config);
+        $sergeant->execute($command);
     }
 }

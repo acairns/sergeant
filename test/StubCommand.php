@@ -2,7 +2,7 @@
 
 class StubCommand
 {
-    public function run()
+    public function get()
     {
         
     }

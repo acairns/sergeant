@@ -6,6 +6,6 @@ class StubCommandHandler implements HandlerInterface
 {
     public function handle($command)
     {
-        $command->run();
+        $command->get();
     }
 }

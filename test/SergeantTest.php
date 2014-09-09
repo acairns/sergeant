@@ -38,7 +38,7 @@ class SergeantTest extends PHPUnit_Framework_TestCase
     {
         $command = $this->createMockCommand();
 
-        $closure = function ($command) {
+        $closure = function () {
             $handler = Mockery::mock('Cairns\Sergeant\Test\StubCommandHandler')->makePartial();
             $handler->shouldReceive('handle')->times(1)->passthru();
             

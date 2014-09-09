@@ -52,14 +52,14 @@ The primary way to install Sergeant is via Composer:
 There are several options when configuring Sergeant, along with conventional defaulting.
 
 ``` php
-$sergeant = new Cairns\Sergeant;
+$sergeant = new Cairns\Sergeant\Sergeant;
 $sergeant->execute(new ExampleCommand); // Will search for ExampleCommandHandler
 ```
 
 Several translators are provided to handle common configuration methods, such as arrays:
 
 ``` php
-$sergeant = new Cairns\Sergeant(array(
+$sergeant = new Cairns\Sergeant\Sergeant(array(
     'ExampleCommand' => 'ExampleCommandHandler'
 ));
 $sergeant->execute(new ExampleCommand); // Will map to ExampleCommandHandler
@@ -68,7 +68,7 @@ $sergeant->execute(new ExampleCommand); // Will map to ExampleCommandHandler
 ... or a closure:
 
 ``` php
-$sergeant = new Cairns\Sergeant(function ($command) {
+$sergeant = new Cairns\Sergeant\Sergeant(function ($command) {
     return get_class($command) . 'Handler';
 });
 $sergeant->execute(new ExampleCommand); // Will assume ExampleCommandHandler
@@ -118,7 +118,7 @@ You can now use Sergeant to handle the delegation of the command to your handler
 $command = new ExampleCommand;
 $command->setMessage("Just Testing");
 
-$sergeant = new Cairns\Sergeant;
+$sergeant = new Cairns\Sergeant\Sergeant;
 $sergeant->execute($command); // string(12) "Just Testing"
 ```
 
@@ -159,6 +159,30 @@ class Example
 ```
 
 Future versions of Sergeant may provide traits to help integrations with common frameworks however the package is committed to remaining framework-agnostic.
+
+
+## IoC
+
+Many frameworks today employ an IoC container to resolve components. Sergeant caters for this by allowing a handler to be returned from a locator.
+
+```php
+$sergeant = new Cairns\Sergeant\Sergeant(function ($command) {
+    $handler = get_class($command) . 'Handler';
+    return new $handler;
+});
+```
+
+How does this help? Well, in Laravel - you'd likely pass in `$app` from a Service Provider:
+
+```php
+$sergeant = new Cairns\Sergeant\Sergeant(function ($command) use ($app) {
+    $handler = get_class($command) . 'Handler';
+    return $app->make($hander);
+});
+```
+
+Now you can enjoy all of your framework's IoC and Dependency Injection magic!
+
 
 
 ## Credits

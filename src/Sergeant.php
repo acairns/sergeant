@@ -1,5 +1,6 @@
 <?php namespace Cairns\Sergeant;
 
+use Cairns\Sergeant\HandlerInterface;
 use Cairns\Sergeant\Translator\TranslatorStrategy;
 
 class Sergeant
@@ -40,9 +41,13 @@ class Sergeant
     public function execute($command)
     {
         $translator = $this->strategy->getTranslator();
-        $translated = $translator->getHandler($command);
         
-        $handler = new $translated;
+        $handler = $translator->getHandler($command);
+        
+        if (! $handler instanceof HandlerInterface) {
+            $handler = new $handler;
+        }
+        
         $handler->handle($command);
     }
 }

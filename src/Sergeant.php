@@ -48,6 +48,6 @@ class Sergeant
             $handler = new $handler;
         }
         
-        $handler->handle($command);
+        return $handler->handle($command);
     }
 }

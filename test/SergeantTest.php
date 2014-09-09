@@ -48,6 +48,24 @@ class SergeantTest extends PHPUnit_Framework_TestCase
         $this->assertCommandHandled($command, $closure);
     }
 
+    public function test_sergeant_returns_handler_return_value()
+    {
+        $command = $this->createMockCommand();
+
+        $closure = function () {
+            $handler = Mockery::mock('Cairns\Sergeant\Test\StubCommandHandler[handle]');
+            $handler->shouldReceive('handle')->times(1)->andReturn('handled');
+            
+            return $handler;
+        };
+
+        $sergeant = new Sergeant($closure);
+        
+        $result = $sergeant->execute($command);
+
+        $this->assertEquals('handled', $result);
+    }
+
     protected function tearDown()
     {
         Mockery::close();
